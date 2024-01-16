@@ -8,6 +8,7 @@ class FilledTextField extends StatelessWidget {
   final Icon iconStart;
   final Icon iconEnd;
   final String hint;
+  final TextEditingController controller;
 
   const FilledTextField(
       {super.key,
@@ -15,7 +16,7 @@ class FilledTextField extends StatelessWidget {
       required this.height,
       required this.iconStart,
       required this.hint,
-      required this.iconEnd});
+      required this.iconEnd, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,7 @@ class FilledTextField extends StatelessWidget {
       width: width,
       margin: const EdgeInsets.only(bottom: 10),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
 
           hintText: hint,
@@ -66,13 +68,18 @@ class FilledPasswordField extends StatefulWidget {
   final double width;
   final double height;
   final Icon iconStart;
+  final String? hint;  // Make hint nullable
+  final TextEditingController controller;
 
   const FilledPasswordField({
     Key? key,
     required this.width,
     required this.height,
     required this.iconStart,
+    required this.controller,
+    this.hint, // Make hint optional
   }) : super(key: key);
+
 
   @override
   _FilledPasswordFieldState createState() => _FilledPasswordFieldState();
@@ -87,6 +94,7 @@ class _FilledPasswordFieldState extends State<FilledPasswordField> {
         width: widget.width,
         margin: const EdgeInsets.only(bottom: 10),
         child: TextField(
+          controller: widget.controller,
             obscureText: _obscureText,
             decoration: InputDecoration(
               labelStyle: TextStyle(fontFamily: Font.ios_display, fontSize: 14),
@@ -101,7 +109,7 @@ class _FilledPasswordFieldState extends State<FilledPasswordField> {
                   _obscureText ? Icons.visibility : Icons.visibility_off,
                 ),
               ),
-              hintText: 'Password',
+              hintText: (widget.hint==null)?'Password':widget.hint,
               hintStyle:
               const TextStyle(color: Colors.grey, fontFamily: Font.ios_display,fontSize: 14),
               focusedBorder: OutlineInputBorder(

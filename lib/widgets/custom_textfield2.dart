@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import '../values/fonts.dart';
 
 class CustomTextInput extends StatelessWidget {
-  const CustomTextInput({super.key, required this.hint, required this.width});
+  const CustomTextInput({super.key, required this.hint, required this.width, required this.controller});
   final String hint;
   final double width;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,8 +16,8 @@ class CustomTextInput extends StatelessWidget {
       decoration: BoxDecoration(
       ),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
-
           hintText: hint,
           labelStyle: const TextStyle(fontFamily: Font.ios_text, fontSize: 14),
           hintStyle:
